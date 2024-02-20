@@ -12,12 +12,8 @@ import java.util.Optional;
 public interface VeiculoRepository extends JpaRepository<Veiculo, Integer> {
     Optional<Veiculo> findByChassi(String chassi);
     Optional<Veiculo> findByPlaca(String placa);
-
-//    List<Veiculo> findVeiculo   OrderByManufacturerAsc();
-//    SELECT * FROM veiculo ORDER BY manufacturer, name, ano;
     @Query("SELECT v FROM Veiculo v ORDER BY v.manufacturer, v.name, v.ano")
     List<Veiculo> listagemOrdenada();
-
     @Query("SELECT v FROM Veiculo v WHERE v.name = :nome ORDER BY v.manufacturer, v.name, v.ano")
     List<Veiculo> pesquisaPorNomeOrdenada(String nome);
     @Query("SELECT v FROM Veiculo v WHERE v.manufacturer = :fabricante ORDER BY v.manufacturer, v.name, v.ano")
@@ -25,8 +21,5 @@ public interface VeiculoRepository extends JpaRepository<Veiculo, Integer> {
     @Query("SELECT v FROM Veiculo v WHERE v.ano = :ano ORDER BY v.manufacturer, v.name, v.ano")
     List<Veiculo> pesquisaPorAnoOrdenada(Integer ano);
 
-    List<Veiculo> findByNameIgnoreCase(String nome);
-    List<Veiculo> findByAno(Integer ano);
-    List<Veiculo> findByManufacturerIgnoreCase(String fabricante);
 
 }
